@@ -17,4 +17,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/posts', 'PostController@index');
+Route::get('/post-list', 'PostController@index');
+Route::get('/post-edit/{id}', 'PostController@edit');
+Route::post('/post-update/{id}', 'PostController@update');
+Route::post('/post-delete/{id}', 'PostController@delete');
+Route::get('/post-create', 'PostController@create');
+Route::post('/post-store', 'PostController@store');

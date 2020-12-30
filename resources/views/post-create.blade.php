@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>文章列表</title>
+        <title>建立文章</title>
 
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
 
@@ -36,14 +36,31 @@
         </nav>
         <div class="container">
             <div class="row align-items-start">
-                @foreach($posts as $post)
-                    <div class="col">
-                        <h3>文章標題：{{ $post->title }}</h3>
-                        <h3>作者：{{ $post->user->name }}</h3>
-                        <h3>狀態：{{ $post->status_text }}</h3>
-                        <p>內容：{{ $post->content }}</p>
+                <form method="POST" action="/post-store">
+                    @csrf
+                    <div class="mb-3">
+                        <label for="exampleFormControlInput1" class="form-label">標題</label>
+                        <input type="text" name="title" class="form-control" id="exampleFormControlInput1">
                     </div>
-                @endforeach
+                    <div class="mb-3">
+                        <label for="exampleFormControlInput2" class="form-label">內容</label>
+                        <input type="text" name="content" class="form-control" id="exampleFormControlInput2">
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleFormControlInput3" class="form-label">狀態</label>
+                        <select class="form-select" name="status" aria-label="Default select example">
+                            <option selected>請選擇</option>
+                            <option value="0">草稿</option>
+                            <option value="1">等待公開</option>
+                            <option value="2">公開</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleFormControlInput4" class="form-label">預計發佈時間</label>
+                        <input type="date" name="published_at" class="form-control" id="exampleFormControlInput4">
+                    </div>
+                    <button type="submit" class="btn btn-success">送出</button>
+                </form>
             </div>
         </div>
     </body>
